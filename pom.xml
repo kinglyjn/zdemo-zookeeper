@@ -1,0 +1,169 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<!-- GAV -->
+	<groupId>com.keyllo.demo</groupId>
+	<artifactId>zdemo-zookeeper</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	
+	
+	<!-- 项目基本信息 -->
+	<name>zdemo-zk</name>
+	<description>zookeeper示例项目</description>
+	<url>http://www.page.keyllo.com/linux/2016/12/13/zookeeper.html</url>
+	<organization>
+		<name>keyllo</name>
+		<url>http://www.keyllo.com</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>kinglyjn</id>
+			<name>kinglyjn</name>
+			<email>admin@keyllo.com</email>
+			<roles>
+				<role>manager</role>
+				<role>designer</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+	
+	
+	<!-- 通用参数信息 -->
+	<properties>
+		<encoding>UTF-8</encoding>
+		<java.version>1.8</java.version>
+		
+		<zookeeper.version>3.4.6</zookeeper.version>
+		<zkclient.version>0.10</zkclient.version>
+		<curator.version>2.8.0</curator.version>
+		<fastjson.version>1.2.29</fastjson.version>
+	</properties>
+	
+	
+	<!-- 依赖包 -->
+	<dependencies>
+		<!-- zookeeper -->
+		<dependency>
+		    <groupId>org.apache.zookeeper</groupId>
+		    <artifactId>zookeeper</artifactId>
+		    <version>${zookeeper.version}</version>
+		</dependency>
+		
+		<!-- zkclient -->
+		<dependency>
+		    <groupId>com.101tec</groupId>
+		    <artifactId>zkclient</artifactId>
+		    <version>${zkclient.version}</version>
+		</dependency>
+
+		<!-- curator -->
+		<dependency>
+		    <groupId>org.apache.curator</groupId>
+		    <artifactId>curator-framework</artifactId>
+		    <version>${curator.version}</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.apache.curator</groupId>
+		    <artifactId>curator-recipes</artifactId>
+		    <version>${curator.version}</version>
+		</dependency>
+
+		<!-- alibaba -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>${fastjson.version}</version>
+		</dependency>
+
+		<dependency>
+		    <groupId>io.netty</groupId>
+		    <artifactId>netty-all</artifactId>
+		    <version>4.1.6.Final</version>
+		</dependency>
+	</dependencies>
+	
+	
+	<!-- 构建信息 -->
+	<build>
+		<plugins>
+			<!-- JAVA编译插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<target>${java.version}</target>
+					<source>${java.version}</source>
+				</configuration>
+			</plugin>
+			
+			<!-- 源码插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<configuration>
+					<attach>true</attach>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			<!-- 中文站点信息生成插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<configuration>
+					<locales>zh_CN</locales>
+				</configuration>
+			</plugin>
+			
+			<!-- 资源管理插件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<encoding>${encoding}</encoding>
+					<delimiters>
+						<delimiter>@</delimiter>
+					</delimiters>
+				</configuration>
+			</plugin>
+		</plugins>
+		
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+	
+	
+	<!-- 环境信息 -->
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<!--  -->
+			</properties>			
+		</profile>
+	</profiles>
+</project>
